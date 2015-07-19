@@ -1,7 +1,7 @@
-#include <cstdio>
 #include <iostream>
+#include "vector.hpp"
 
 int main()
 {
-    std::cout << "hello world" << std::endl;
+    rabbit::vector<int> test_vec;
 }
