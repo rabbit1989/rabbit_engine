@@ -26,6 +26,7 @@ DEALINGS IN THE SOFTWARE.
 
 
 #include <cstdio>
+#include "exception.hpp"
 
 namespace rabbit{
 
@@ -36,6 +37,7 @@ public:
     vector<T>(int);
     vector<T>(vector<T> &);
     vector<T>& operator =(vector<T>&);
+    T& operator[](int);
     void push_back(T&);
     unsigned int size(){return _size;}
     unsigned int capacity(){return _capacity;}
@@ -57,6 +59,41 @@ vector<T>::vector<T>(): _size(0),_capacity(4) {
 template<class T>
 vector<T>::vector<T>(int size): _size(0), _capacity(size) {
     _data = new T[size];
+}
+
+template<class T>
+vector<T>& vector<T>::operator=(vector<T>& vec){
+    delete[] _data;
+    _capacity = vec._capacity;
+    _size = vec._size;
+    _data = new T[_capacity];
+    for (int i = 0; i < _size; i++)
+        _data[i] = vec._data[i];
+    return *this;
+}
+
+template<class T>
+T& vector<T>::operator[](int index){
+    if (index < 0 || index >= _size){
+        throw exception(ERROR_INDEX_OUT_OF_RANGE);
+    }
+    return _data[index];
+}
+
+template<class T>
+void vector<T>::push_back(T& v){
+
+    if (_size >= _capacity){
+        _capacity *= 2;
+        T* tmp = new T[_capacity];
+        for (unsigned int i = 0; i < _size; i++)
+            tmp[i] = _data[i];
+        delete[] _data;
+        _data = tmp;
+    }
+
+    _data[_size++] = v;
+
 }
 
 template<class T>
