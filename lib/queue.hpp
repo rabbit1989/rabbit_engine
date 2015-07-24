@@ -19,43 +19,10 @@ FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TOR
 OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 DEALINGS IN THE SOFTWARE.
 *************************************************************************
-                a simple exception class
+    The implementation of queue, for practice purpose
 *************************************************************************/
 
-#include<cstdio>
+#ifndef QUEUE_HPP
+#define QUEUE_HPP
 
-#ifndef EXCEPTION_HPP
-#define EXCEPTION
-
-namespace rabbit{
-
-    enum ERROR{
-        DEFAULT = 100,
-        INDEX_OUT_OF_RANGE = 101,
-        FILE_IS_INVALID = 102,
-    };
-
-    class exception{
-    public:
-        exception(){
-            _err_code = DEFAULT;
-            _print();
-        }
-
-        exception(ERROR code) {
-            _err_code = code;
-            _print();
-        }
-
-    private:
-        void _print(){
-            switch(_err_code){
-                case INDEX_OUT_OF_RANGE: fprintf(stderr, "exception %d:   index out of range", _err_code); break;
-                case FILE_IS_INVALID: fprintf(stderr, "execption %d:   file pointer is invalid", _err_code); break;
-                default: fprintf(stderr, "exception: unknown error");
-            }
-        }
-        unsigned int _err_code;
-    };
-}
-#endif // EXCEPTION_HPP
+#endif // QUEUE_HPP

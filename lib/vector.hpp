@@ -33,17 +33,19 @@ namespace rabbit{
 template<class T>
 class vector {
 public:
-    vector<T>();
-    vector<T>(int);
-    vector<T>(vector<T> &);
+    vector();
+    vector(int);
+    vector(vector<T> &);
     vector<T>& operator =(vector<T>&);
     T& operator[](int);
+    T& back();
+    void pop_back();
     void push_back(T&);
     unsigned int size(){return _size;}
     unsigned int capacity(){return _capacity;}
     T& at(int);
     void clear();
-    ~vector<T>();
+    ~vector();
 
 private:
     T* _data;
@@ -52,12 +54,12 @@ private:
 };
 
 template<class T>
-vector<T>::vector<T>(): _size(0),_capacity(4) {
+vector<T>::vector(): _size(0),_capacity(4) {
     _data = new T[4];
 }
 
 template<class T>
-vector<T>::vector<T>(int size): _size(0), _capacity(size) {
+vector<T>::vector(int size): _size(0), _capacity(size) {
     _data = new T[size];
 }
 
@@ -74,10 +76,20 @@ vector<T>& vector<T>::operator=(vector<T>& vec){
 
 template<class T>
 T& vector<T>::operator[](int index){
-    if (index < 0 || index >= _size){
-        throw exception(ERROR_INDEX_OUT_OF_RANGE);
-    }
+    if (index < 0 || index >= _size)throw exception(INDEX_OUT_OF_RANGE);
     return _data[index];
+}
+
+template<class T>
+T& vector<T>::back(){
+    if( _size <= 0 )throw exception(INDEX_OUT_OF_RANGE);
+    return _data[_size-1];
+}
+
+template<class T>
+void vector<T>::pop_back(){
+    if (_size <= 0) throw exception(INDEX_OUT_OF_RANGE);
+    _size--;
 }
 
 template<class T>
@@ -97,10 +109,14 @@ void vector<T>::push_back(T& v){
 }
 
 template<class T>
+T& vector<T>::at(int index){
+    return this->operator[](index);
+}
+
+template<class T>
 vector<T>::~vector<T>(){
     delete [] _data;
 }
-
 }
 
 #endif // VECTOR_HPP

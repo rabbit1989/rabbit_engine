@@ -1,0 +1,14 @@
+# depslib dependency file v1.0
+1437302190 source:e:\work\engine\rabbit_engine\lib\vector.cc
+
+1437356632 source:e:\work\engine\rabbit_engine\main.cc
+	<iostream>
+	"vector.hpp"
+
+1437528256 e:\work\engine\rabbit_engine\lib\vector.hpp
+	<cstdio>
+	"exception.hpp"
+
+1437528335 e:\work\engine\rabbit_engine\utils\exception.hpp
+	<cstdio>
+
