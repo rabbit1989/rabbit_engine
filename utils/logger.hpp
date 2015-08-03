@@ -29,10 +29,11 @@ DEALINGS IN THE SOFTWARE.
 #include <cstring>
 
 #include "exception.hpp"
+#include <stdarg.h>
 
 namespace rabbit{
 
-    enum LEVEL = {
+    enum LEVEL{
         INFO,
         WARN,
         FATAL,
@@ -45,27 +46,49 @@ namespace rabbit{
         static void info(const char* format_str, ...);
         static void warn(const char* format_str, ...);
         static void fatal(const char* format_str, ...);
+        static void init();
     private:
-        static void _print(format_str, ...);
-        static LEVEL _level = INFO;
-        static FILE *_file = 0;
+        static void _print(LEVEL level, const char* format_str, va_list args);
+        static LEVEL _level;
+        static FILE *_file;
     };
 
-    static void logger::info(const char *format_str, ...){
-        _print(INFO, format_str, ...);
+    LEVEL logger::_level = INFO;
+    FILE* logger::_file = 0;
+
+    /**
+        initialization of logger. Must be called!
+    */
+    void logger::init(){
+        set_log_level(INFO);
+        set_file(0);
     }
 
-    static void logger::warn(const char *format_str, ...){
-        _print(WARN, format_str, ...);
-    }(LPCTSTR
-
-    static void logger::fatal(const char *format_str, ...){
-        _print(FATAL, format_str, ...);
+    void logger::info(const char *format_str, ...){
+        va_list args;
+        va_start(args, format_str);
+        _print(INFO, format_str, args);
+        va_end(args);
     }
-    static void logger::_print(LEVEL level, const char *format_str, ...){
+
+    void logger::warn(const char *format_str, ...){
+        va_list args;
+        va_start(args, format_str);
+        _print(WARN, format_str, args);
+        va_end(args);
+    }
+
+    void logger::fatal(const char *format_str, ...){
+        va_list args;
+        va_start(args, format_str);
+        _print(FATAL, format_str, args);
+        va_end(args);
+    }
+    void logger::_print(LEVEL level, const char *format_str, va_list args){
         if(_level >= level) {
             if (_file == 0) throw exception (FILE_IS_INVALID);
-            fprintf(_file, format_str, ...);
+            vfprintf(_file, format_str, args);
+            fprintf(_file, "\n");
         }
     }
 }

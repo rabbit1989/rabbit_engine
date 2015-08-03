@@ -25,7 +25,7 @@ DEALINGS IN THE SOFTWARE.
 #include<cstdio>
 
 #ifndef EXCEPTION_HPP
-#define EXCEPTION
+#define EXCEPTION_HPP
 
 namespace rabbit{
 
@@ -55,7 +55,7 @@ namespace rabbit{
                 default: fprintf(stderr, "exception: unknown error");
             }
         }
-        unsigned int _err_code;
+        ERROR _err_code;
     };
 }
 #endif // EXCEPTION_HPP
