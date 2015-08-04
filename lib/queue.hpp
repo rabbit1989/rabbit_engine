@@ -25,4 +25,114 @@ DEALINGS IN THE SOFTWARE.
 #ifndef QUEUE_HPP
 #define QUEUE_HPP
 
+#include "exception.hpp"
+#include <cstring>
+
+namespace rabbit{
+
+template<class T, size_t SIZE = 20>
+class queue{
+public:
+    queue();
+    queue(size_t);
+    queue(queue<T, SIZE>&);
+    queue<T, SIZE>& operator=(queue<T, SIZE>&);
+    ~queue();
+    void push(T&);
+    void pop();
+    T& front();
+    bool empty();
+    bool full();
+
+private:
+    //init private members
+    void _init(size_t);
+    int _get_size(){ return _size; };
+    //copy queue data
+    void _copy(queue<T, SIZE>&);
+
+private:
+    T* _data;
+    int _front, _rear;
+    size_t _size;
+};
+
+template<class T, size_t SIZE>
+queue<T, SIZE>::queue(){
+    _init(SIZE);
+}
+
+template<class T, size_t SIZE>
+queue<T, SIZE>::queue(size_t size){
+    _init(size);
+}
+
+template<class T, size_t SIZE>
+queue<T, SIZE>::queue(queue<T, SIZE>& q){
+    _init(q._get_size());
+    _copy(q);
+}
+
+template<class T, size_t SIZE>
+queue<T, SIZE>& queue<T, SIZE>::operator=(queue<T, SIZE>& q){
+    _init(q._get_size());
+    _copy(q);
+    return *this;
+}
+
+template<class T, size_t SIZE>
+queue<T, SIZE>::~queue() {
+
+    delete [] _data;
+}
+
+template<class T, size_t SIZE>
+void queue<T, SIZE>::_init(size_t size){
+    _data = new int[size];
+    _front = 0;
+    _rear = 0;
+    _size = size;
+}
+
+template<class T, size_t SIZE>
+void queue<T, SIZE>::_copy(queue<T, SIZE> &q) {
+    size_t q_size = q._get_size();
+    memcpy(_data, q._data, sizeof(T)*q_size);
+    _size = q_size;
+    _front = q._front;
+    _rear = q._rear;
+}
+
+template<class T, size_t SIZE>
+void queue<T, SIZE>::pop(){
+    if (empty() == true)throw exception(QUEUE_IS_EMPTY);
+    _rear = (_rear + 1) % _size;
+}
+
+template<class T, size_t SIZE>
+T& queue<T, SIZE>::front() {
+    if (empty() == true)throw exception(QUEUE_IS_EMPTY);
+    return _data[_rear];
+}
+
+template<class T, size_t SIZE>
+void queue<T, SIZE>::push(T& val){
+    if (full() == true)throw exception(QUEUE_IS_FULL);
+    _data[_front] = val;
+    _front = (_front + 1) % _size;
+}
+
+template<class T, size_t SIZE>
+bool queue<T, SIZE>::empty() {
+   return _front == _rear;
+}
+
+template<class T, size_t SIZE>
+bool queue<T, SIZE>::full() {
+
+    return (_front + 1) % SIZE == _rear;
+}
+
+}
+
 #endif // QUEUE_HPP

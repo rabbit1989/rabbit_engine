@@ -19,7 +19,7 @@ FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TOR
 OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 DEALINGS IN THE SOFTWARE.
 *************************************************************************
-                some basic algorithms
+                some basic algorithms, for practice purpose
 *************************************************************************/
 
 #ifdef ALGORITHM_HPP

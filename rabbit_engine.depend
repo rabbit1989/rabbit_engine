@@ -1,14 +1,36 @@
 # depslib dependency file v1.0
 1437302190 source:e:\work\engine\rabbit_engine\lib\vector.cc
 
-1437356632 source:e:\work\engine\rabbit_engine\main.cc
+1438698077 source:e:\work\engine\rabbit_engine\main.cc
 	<iostream>
 	"vector.hpp"
+	"logger.hpp"
+	"stack.hpp"
+	"queue.hpp"
 
-1437528256 e:\work\engine\rabbit_engine\lib\vector.hpp
+1438570694 e:\work\engine\rabbit_engine\lib\vector.hpp
 	<cstdio>
 	"exception.hpp"
 
-1437528335 e:\work\engine\rabbit_engine\utils\exception.hpp
+1438698306 e:\work\engine\rabbit_engine\utils\exception.hpp
 	<cstdio>
+	"consts.hpp"
+	"logger.hpp"
+
+1438698361 e:\work\engine\rabbit_engine\utils\logger.hpp
+	<cstdio>
+	<cstring>
+	"consts.hpp"
+	"uncopyable.hpp"
+	<stdarg.h>
+
+1438570958 e:\work\engine\rabbit_engine\lib\stack.hpp
+
+1438650248 e:\work\engine\rabbit_engine\base\uncopyable.hpp
+
+1438698115 e:\work\engine\rabbit_engine\lib\queue.hpp
+	"exception.hpp"
+	<cstring>
+
+1438698433 e:\work\engine\rabbit_engine\utils\consts.hpp
 

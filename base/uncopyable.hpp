@@ -19,43 +19,19 @@ FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TOR
 OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 DEALINGS IN THE SOFTWARE.
 *************************************************************************
-                a simple exception class
+                base class for uncopyable classes
 *************************************************************************/
 
-#include<cstdio>
+#ifndef UNCOPYABLE_HPP
+#define UNCOPYABLE_HPP
 
-#ifndef EXCEPTION_HPP
-#define EXCEPTION_HPP
+class uncopyable{
+public:
+    uncopyable(){};
+    ~uncopyable(){};
+private:
+    uncopyable(uncopyable&);
+    uncopyable& operator=(uncopyable&);
+};
 
-
-#include "consts.hpp"
-#include "logger.hpp"
-
-namespace rabbit{
-
-    class exception{
-    public:
-        exception(){
-            _err_code = DEFAULT;
-            _print();
-        }
-
-        exception(ERROR code) {
-            _err_code = code;
-            _print();
-        }
-
-    private:
-        void _print(){
-            switch(_err_code){
-                case INDEX_OUT_OF_RANGE: logger::fatal("exception %d:   index out of range", _err_code); break;
-                case FILE_IS_INVALID: logger::fatal("execption %d:  file pointer is invalid", _err_code); break;
-                case QUEUE_IS_EMPTY: logger::fatal("exception %d:   queue is empty", _err_code); break;
-                case QUEUE_IS_FULL: logger::fatal("exception %d: queue is full", _err_code); break;
-                default: logger::fatal("exception: unknown error");
-            }
-        }
-        ERROR _err_code;
-    };
-}
-#endif // EXCEPTION_HPP
+#endif // UNCOPYABLE_HPP

@@ -28,18 +28,13 @@ DEALINGS IN THE SOFTWARE.
 #include <cstdio>
 #include <cstring>
 
-#include "exception.hpp"
+#include "consts.hpp"
+#include "uncopyable.hpp"
 #include <stdarg.h>
 
 namespace rabbit{
 
-    enum LEVEL{
-        INFO,
-        WARN,
-        FATAL,
-    };
-
-    class logger{
+    class logger: uncopyable{
     public:
         static void set_log_level(LEVEL level){ _level = level;}
         static void set_file(FILE* file){ _file = file; }
@@ -51,6 +46,7 @@ namespace rabbit{
         static void _print(LEVEL level, const char* format_str, va_list args);
         static LEVEL _level;
         static FILE *_file;
+        logger();
     };
 
     LEVEL logger::_level = INFO;
@@ -85,8 +81,8 @@ namespace rabbit{
         va_end(args);
     }
     void logger::_print(LEVEL level, const char *format_str, va_list args){
-        if(_level >= level) {
-            if (_file == 0) throw exception (FILE_IS_INVALID);
+        if(_level <= level) {
+//            if (_file == 0) throw exception (FILE_IS_INVALID);
             vfprintf(_file, format_str, args);
             fprintf(_file, "\n");
         }

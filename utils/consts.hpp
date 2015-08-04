@@ -19,43 +19,28 @@ FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TOR
 OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 DEALINGS IN THE SOFTWARE.
 *************************************************************************
-                a simple exception class
+                store const values
 *************************************************************************/
 
-#include<cstdio>
+#ifndef CONST_HPP
+#define CONST_HPP
 
-#ifndef EXCEPTION_HPP
-#define EXCEPTION_HPP
+namespace rabbit {
 
+    //exception type
+    enum ERROR{
+        DEFAULT = 100,
+        INDEX_OUT_OF_RANGE = 101,
+        FILE_IS_INVALID = 102,
+        QUEUE_IS_EMPTY = 103,
+        QUEUE_IS_FULL = 104,
+    };
 
-#include "consts.hpp"
-#include "logger.hpp"
-
-namespace rabbit{
-
-    class exception{
-    public:
-        exception(){
-            _err_code = DEFAULT;
-            _print();
-        }
-
-        exception(ERROR code) {
-            _err_code = code;
-            _print();
-        }
-
-    private:
-        void _print(){
-            switch(_err_code){
-                case INDEX_OUT_OF_RANGE: logger::fatal("exception %d:   index out of range", _err_code); break;
-                case FILE_IS_INVALID: logger::fatal("execption %d:  file pointer is invalid", _err_code); break;
-                case QUEUE_IS_EMPTY: logger::fatal("exception %d:   queue is empty", _err_code); break;
-                case QUEUE_IS_FULL: logger::fatal("exception %d: queue is full", _err_code); break;
-                default: logger::fatal("exception: unknown error");
-            }
-        }
-        ERROR _err_code;
+    //log level
+    enum LEVEL{
+        INFO = 1,
+        WARN = 2,
+        FATAL = 3,
     };
 }
-#endif // EXCEPTION_HPP
+#endif // CONST_HPP
