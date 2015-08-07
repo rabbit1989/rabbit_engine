@@ -15,6 +15,7 @@
 					<Add option="-g" />
 					<Add directory="E:/work/engine/rabbit_engine/lib" />
 					<Add directory="E:/work/engine/rabbit_engine/utils" />
+					<Add directory="E:/work/engine/rabbit_engine/base" />
 				</Compiler>
 			</Target>
 			<Target title="Release">
@@ -33,11 +34,13 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="base/uncopyable.hpp" />
 		<Unit filename="lib/algorithm.hpp" />
 		<Unit filename="lib/queue.hpp" />
 		<Unit filename="lib/stack.hpp" />
 		<Unit filename="lib/vector.hpp" />
 		<Unit filename="main.cc" />
+		<Unit filename="utils/consts.hpp" />
 		<Unit filename="utils/exception.hpp" />
 		<Unit filename="utils/logger.hpp" />
 		<Extensions>

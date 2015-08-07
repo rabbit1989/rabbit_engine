@@ -82,7 +82,10 @@ namespace rabbit{
     }
     void logger::_print(LEVEL level, const char *format_str, va_list args){
         if(_level <= level) {
-//            if (_file == 0) throw exception (FILE_IS_INVALID);
+//          if (_file == 0) throw exception (FILE_IS_INVALID);
+            if (_file == 0) {
+                _file = stderr;
+            }
             vfprintf(_file, format_str, args);
             fprintf(_file, "\n");
         }

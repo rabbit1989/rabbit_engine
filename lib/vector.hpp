@@ -41,16 +41,16 @@ public:
     T& back();
     void pop_back();
     void push_back(T&);
-    unsigned int size(){return _size;}
-    unsigned int capacity(){return _capacity;}
+    size_t size(){return _size;}
+    size_t capacity(){return _capacity;}
     T& at(int);
     void clear();
     ~vector();
 
 private:
     T* _data;
-    unsigned _size;
-    unsigned _capacity;
+    size_t _size;
+    size_t _capacity;
 };
 
 template<class T>

@@ -43,10 +43,12 @@ public:
     T& front();
     bool empty();
     bool full();
+    size_t size();
 
 private:
     //init private members
     void _init(size_t);
+    //return the capacity of the queue
     int _get_size(){ return _size; };
     //copy queue data
     void _copy(queue<T, SIZE>&);
@@ -131,6 +133,11 @@ template<class T, size_t SIZE>
 bool queue<T, SIZE>::full() {
 
     return (_front + 1) % SIZE == _rear;
+}
+
+template<class T, size_t SIZE>
+size_t queue<T, SIZE>::size() {
+    return (_front - _rear + int(_size)) % _size;
 }
 
 }

@@ -19,52 +19,7 @@ FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TOR
 OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 DEALINGS IN THE SOFTWARE.
 *************************************************************************
-    The implementation of stack, for practice purpose
+                utils.hpp:header files
 *************************************************************************/
 
-#ifndef STACK_HPP
-#define STACK_HPP
 
-namespace rabbit{
-
-template<class T>
-class stack{
-public:
-    void push(T&);
-    void pop();
-    T& top();
-    bool empty();
-    size_t size();
-private:
-    rabbit::vector<T> _data;
-};
-
-template<class T>
-void stack<T>::push(T& value){
-    _data.push_back(value);
-}
-
-template<class T>
-bool stack<T>::empty(){
-    return _data.size() <= 0;
-}
-
-template<class T>
-void stack<T>::pop(){
-    _data.pop_back();
-}
-
-template<class T>
-T& stack<T>::top(){
-    if (_data.size() <= 0) throw exception(INDEX_OUT_OF_RANGE);
-    return _data.back();
-}
-
-template<class T>
-size_t stack<T>::size(){
-    return _data.size();
-}
-
-}
-
-#endif // STACK_HPP
