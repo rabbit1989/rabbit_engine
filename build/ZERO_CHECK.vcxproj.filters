@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="E:\work\engine\rabbit_engine\build\CMakeFiles\eccb1b3fb1c7dd478657bcb585878ee7\generate.stamp.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{46191F6B-D229-4B04-BC64-6E3C6BFE1090}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
